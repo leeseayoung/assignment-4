@@ -4,6 +4,7 @@ import Detail from "./pages/Detail";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
+import SignIn from "./pages/SignIn";
 
 function App() {
   const [expenses, setExpenses] = useState([
@@ -77,6 +78,11 @@ function App() {
           <Route
             path="/detail/:id"
             element={<Detail expenses={expenses} setExpenses={setExpenses} />}
+          />
+          <Route path="/sign_in" element={<SignIn />} />
+          <Route
+            path="/sign_up"
+            element={<div>회원 가입 페이지 입니다!</div>}
           />
         </Routes>
       </BrowserRouter>

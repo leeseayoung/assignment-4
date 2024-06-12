@@ -5,6 +5,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
   const [expenses, setExpenses] = useState([
@@ -80,10 +81,7 @@ function App() {
             element={<Detail expenses={expenses} setExpenses={setExpenses} />}
           />
           <Route path="/sign_in" element={<SignIn />} />
-          <Route
-            path="/sign_up"
-            element={<div>회원 가입 페이지 입니다!</div>}
-          />
+          <Route path="/sign_up" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -78,6 +78,15 @@
       "amount": 300000,
       "description": "내일배움캠프휴가",
       "createdBy": "tn98"
+    },
+    {
+      "id": "1d223a69-a723-45ad-bf09-efaae2d15978",
+      "month": 1,
+      "date": "2024-01-15",
+      "item": "도서",
+      "amount": 20000,
+      "description": "해리포터",
+      "createdBy": "tn98"
     }
   ]
 }

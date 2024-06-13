@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { postExpense } from "../lib/api/expense";
-import { useMutation } from "@tanstack/react-query";
+import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const InputRow = styled.div`
   display: flex;
@@ -54,8 +55,16 @@ export default function CreateExpense({ user, month }) {
   const [newItem, setNewItem] = useState("");
   const [newAmount, setNewAmount] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const queryClient = new QueryClient();
+  const navigate = useNavigate();
 
-  const mutation = useMutation({ mutationFn: postExpense });
+  const mutation = useMutation({
+    mutationFn: postExpense,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["expense"]);
+      navigate(0);
+    },
+  });
 
   const handleAddExpense = () => {
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;

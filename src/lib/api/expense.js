@@ -26,13 +26,17 @@ export const getExpense = async ({ queryKey }) => {
 
 export const postExpense = async (newExpense) => {
   try {
-    const { data } = await axios.post(
-      `${JSON_SERVER_HOST}/expenses`,
-      newExpense
+    const { data } = await axios.put(
+      `${JSON_SERVER_HOST}/expenses/${id}`,
+      rest
     );
     return data;
   } catch (error) {
     console.log(error);
     alert("뭔가 잘못된거 같아요! 데이터가 써지지 않아요");
   }
+};
+
+export const putExpense = async (updatedExpense) => {
+  const { id, ...rest } = updatedExpense;
 };

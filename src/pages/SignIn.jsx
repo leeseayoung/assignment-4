@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -61,18 +63,48 @@ const ToggleEvent = styled.button`
 `;
 
 export default function SignIn() {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSignIn = () => {
+    console.log(id);
+    console.log(password);
+  };
+
   return (
     <Container>
       <InputGroup>
         <label htmlFor="id">아이디</label>
-        <Input type="text" id="id" placeholder="아이디" />
+        <Input
+          type="text"
+          onChange={(e) => {
+            setId(e.target.value);
+          }}
+          id="id"
+          placeholder="아이디"
+        />
       </InputGroup>
+
       <InputGroup>
         <label htmlFor="password">비밀번호</label>
-        <Input type="password" id="password" placeholder="비밀번호" />
+        <Input
+          type="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          id="password"
+          placeholder="비밀번호"
+        />
       </InputGroup>
-      <Button onClick={() => {}}>로그인</Button>
-      <ToggleEvent onClick={() => {}}>회원가입</ToggleEvent>
+      <Button onClick={handleSignIn}>로그인</Button>
+      <ToggleEvent
+        onClick={() => {
+          navigate("/sign_up");
+        }}
+      >
+        회원가입
+      </ToggleEvent>
     </Container>
   );
 }

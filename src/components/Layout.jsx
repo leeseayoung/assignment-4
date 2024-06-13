@@ -1,6 +1,6 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getUserInfo } from "../lib/auth";
+import { getUserInfo } from "../lib/api/auth";
 import { useEffect } from "react";
 
 // Navbar styled-component 정의

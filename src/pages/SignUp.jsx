@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { register } from "../lib/auth";
+import { register } from "../lib/api/auth";
 
 const Container = styled.div`
   max-width: 400px;

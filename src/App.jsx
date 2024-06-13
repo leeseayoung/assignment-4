@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import { getUserInfo } from "./lib/auth";
+import { getUserInfo } from "./lib/api/auth";
 import Layout from "./components/Layout";
 import Profile from "./pages/Profile";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { updateProfile } from "../lib/auth";
+import { updateProfile } from "../lib/api/auth";
 import { useNavigate } from "react-router-dom";
 
 // Container styled-component 정의

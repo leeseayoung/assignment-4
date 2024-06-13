@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { register } from "../lib/auth";
 
 const Container = styled.div`
   max-width: 400px;
@@ -68,7 +69,7 @@ export default function SignUp() {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     // console.log(id);
     // console.log(password);
     // console.log(nickname);
@@ -84,6 +85,16 @@ export default function SignUp() {
     if (nickname.length < 1 || nickname.length > 10) {
       alert("닉네임은 1글자 이상 10글자 미만");
       return;
+    }
+
+    const response = await register({
+      id: id,
+      password: password,
+      nickname: nickname,
+    });
+    if (response) {
+      confirm("회원가입이 환료되었습니다.");
+      navigate("/sign_in");
     }
   };
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { login } from "../lib/auth";
 
 const Container = styled.div`
   max-width: 400px;
@@ -62,14 +63,19 @@ const ToggleEvent = styled.button`
   }
 `;
 
-export default function SignIn() {
+export default function SignIn({ setUser }) {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    console.log(id);
-    console.log(password);
+  const handleSignIn = async () => {
+    const { userId, nickname, avatar } = await login({
+      id: id,
+      password: password,
+    });
+    alert("로그인이 되었습니다!");
+    setUser({ userId, nickname, avatar });
+    navigate("/");
   };
 
   return (

@@ -26,9 +26,9 @@ export const getExpense = async ({ queryKey }) => {
 
 export const postExpense = async (newExpense) => {
   try {
-    const { data } = await axios.put(
-      `${JSON_SERVER_HOST}/expenses/${id}`,
-      rest
+    const { data } = await axios.post(
+      `${JSON_SERVER_HOST}/expenses`,
+      newExpense
     );
     return data;
   } catch (error) {
@@ -39,4 +39,24 @@ export const postExpense = async (newExpense) => {
 
 export const putExpense = async (updatedExpense) => {
   const { id, ...rest } = updatedExpense;
+  try {
+    const { data } = await axios.put(
+      `${JSON_SERVER_HOST}/expenses/${id}`,
+      rest
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    alert("뭔가 잘못된거 같아요! 수정되지가 않아요");
+  }
+};
+
+export const deleteExpense = async (id) => {
+  try {
+    const { data } = await axios.delete(`${JSON_SERVER_HOST}/expenses/${id}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    alert("뭔가 잘못된거 같아요! 삭제되지 않아요");
+  }
 };

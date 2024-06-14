@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { getExpense, putExpense } from "../lib/api/expense";
+import { getExpense, putExpense, deleteExpense } from "../lib/api/expense";
 
 const Container = styled.div`
   max-width: 800px;
@@ -86,7 +86,14 @@ export default function Detail() {
   const mutationEdit = useMutation({
     mutationFn: putExpense,
     onSuccess: () => {
-      queryClient.invalidateQueries(["expense"]);
+      navigate("/");
+      queryClient.invalidateQueries(["expenses"]);
+    },
+  });
+
+  const mutationDelete = useMutation({
+    mutationFn: deleteExpense,
+    onSuccess: () => {
       navigate("/");
     },
   });
@@ -104,8 +111,8 @@ export default function Detail() {
 
     const newExpense = {
       id: id,
-      data: date,
-      item: id,
+      date: date,
+      item: item,
       amount: parseInt(amount, 10),
       description: description,
     };
@@ -113,10 +120,8 @@ export default function Detail() {
     mutationEdit.mutate(newExpense);
   };
 
-  const deleteExpense = () => {
-    const newExpenses = expenses.filter((expense) => expense.id !== id);
-    setExpenses(newExpenses);
-    navigate("/");
+  const handleDelete = () => {
+    mutationDelete.mutate(id);
   };
 
   return (
@@ -163,7 +168,7 @@ export default function Detail() {
       </InputGroup>
       <ButtonGroup>
         <Button onClick={editExpense}>수정</Button>
-        <Button danger="true" onClick={deleteExpense}>
+        <Button danger="true" onClick={handleDelete}>
           삭제
         </Button>
         <BackButton onClick={() => navigate(-1)}>뒤로 가기</BackButton>
